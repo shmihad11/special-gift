@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>একটা ছোট্ট সারপ্রাইজ 💗</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@600;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: "Hind Siliguri", sans-serif;
+            background: #090612;
+            color: #fff;
+            overflow: hidden
+        }
+
+        button {
+            font: inherit
+        }
+
+        .page {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 25px;
+            overflow: hidden
+        }
+
+        .page.active {
+            display: flex;
+            animation: in .65s ease
+        }
+
+        @keyframes in {
+            from {
+                opacity: 0;
+                transform: scale(1.04)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
+        }
+
+        .bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 20%, #48245c, transparent 33%), radial-gradient(circle at 80% 80%, #60214d, transparent 32%), linear-gradient(135deg, #090612, #180b25, #090612)
+        }
+
+        .stars {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(#fff 1px, transparent 1px);
+            background-size: 58px 58px;
+            opacity: .16
+        }
+
+        .content {
+            position: relative;
+            z-index: 3;
+            max-width: 700px;
+            width: 100%
+        }
+
+        .tag {
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: #d9bce9
+        }
+
+        .emoji {
+            font-size: 65px;
+            animation: bob 2s infinite
+        }
+
+        .sub {
+            font-size: 18px;
+            color: #c9bfd1;
+            line-height: 1.8
+        }
+
+        h1 {
+            font-family: "Noto Serif Bengali";
+            font-size: clamp(40px, 8vw, 76px);
+            line-height: 1.25;
+            margin: 16px 0;
+            background: linear-gradient(90deg, #fff, #ffb5d7, #d8b8ff);
+            -webkit-background-clip: text;
+            color: transparent
+        }
+
+        .btn {
+            border: 1px solid #ffffff20;
+            color: #fff;
+            background: linear-gradient(135deg, #a957c8, #e64d91);
+            padding: 14px 28px;
+            border-radius: 50px;
+            margin-top: 28px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 600;
+            box-shadow: 0 12px 35px #d74e9438;
+            transition: .25s
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.03)
+        }
+
+        .choice {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 28px
+        }
+
+        .card {
+            width: 155px;
+            padding: 20px;
+            border: 1px solid #ffffff18;
+            background: #ffffff09;
+            border-radius: 22px;
+            cursor: pointer;
+            transition: .3s
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            background: #ffffff15
+        }
+
+        .card div {
+            font-size: 42px
+        }
+
+        .card p {
+            color: #ddd
+        }
+
+        .counter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 28px 0
+        }
+
+        .time {
+            width: 78px;
+            padding: 12px;
+            background: #ffffff0b;
+            border: 1px solid #ffffff12;
+            border-radius: 15px
+        }
+
+        .time b {
+            font-size: 26px
+        }
+
+        .time span {
+            display: block;
+            font-size: 11px;
+            color: #aaa0b5
+        }
+
+        .envelope {
+            width: 320px;
+            height: 205px;
+            margin: 38px auto;
+            position: relative;
+            cursor: pointer
+        }
+
+        .env {
+            position: absolute;
+            inset: 0;
+            background: #bd4b82;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px #0008
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 115px solid #e0679d;
+            transform-origin: top;
+            transition: .8s;
+            z-index: 4
+        }
+
+        .letter {
+            position: absolute;
+            left: 12px;
+            right: 12px;
+            top: 20px;
+            height: 165px;
+            background: #fff9fc;
+            color: #49303e;
+            border-radius: 8px;
+            padding: 19px;
+            text-align: left;
+            line-height: 1.5;
+            z-index: 2;
+            transition: .8s
+        }
+
+        .letter h3 {
+            color: #b43d78
+        }
+
+        .envelope.open .flap {
+            transform: rotateX(180deg)
+        }
+
+        .envelope.open .letter {
+            transform: translateY(-120px);
+            z-index: 5
+        }
+
+        .reason {
+            font-size: 65px;
+            margin: 15px
+        }
+
+        .reasonText {
+            font-family: "Noto Serif Bengali";
+            font-size: 25px;
+            color: #ffe0ed;
+            min-height: 100px;
+            padding: 0 15px
+        }
+
+        .cake {
+            width: 230px;
+            height: 170px;
+            margin: 25px auto;
+            position: relative
+        }
+
+        .base {
+            position: absolute;
+            bottom: 15px;
+            left: 20px;
+            width: 190px;
+            height: 95px;
+            border-radius: 15px 15px 22px 22px;
+            background: linear-gradient(#f66da8, #bc3d78)
+        }
+
+        .cream {
+            position: absolute;
+            top: 58px;
+            left: 20px;
+            width: 190px;
+            height: 18px;
+            background: #fff2f8;
+            border-radius: 50%
+        }
+
+        .plate {
+            position: absolute;
+            bottom: 3px;
+            left: 0;
+            width: 230px;
+            height: 18px;
+            border-radius: 50%;
+            background: #e9dafa
+        }
+
+        .candle {
+            position: absolute;
+            bottom: 108px;
+            width: 12px;
+            height: 45px;
+            background: #b9a1ff;
+            border-radius: 4px;
+            cursor: pointer;
+            z-index: 4
+        }
+
+        .c1 {
+            left: 65px
+        }
+
+        .c2 {
+            left: 109px
+        }
+
+        .c3 {
+            left: 153px
+        }
+
+        .flame {
+            position: absolute;
+            width: 11px;
+            height: 18px;
+            top: -21px;
+            left: 1px;
+            background: #ffd15b;
+            border-radius: 50% 50% 50% 0;
+            transform: rotate(-45deg);
+            animation: f .5s infinite alternate
+        }
+
+        @keyframes f {
+            to {
+                transform: rotate(-45deg) scale(1.2)
+            }
+        }
+
+        .quote {
+            font-size: 22px;
+            color: #ded1e5;
+            line-height: 1.9
+        }
+
+        .tap {
+            font-size: 13px;
+            color: #91869e;
+            margin-top: 14px
+        }
+
+        .spark {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            background: #fff;
+            border-radius: 50%;
+            z-index: 30;
+            animation: spark 1s forwards
+        }
+
+        @keyframes spark {
+            to {
+                transform: translate(var(--x), var(--y));
+                opacity: 0
+            }
+        }
+
+        .heart {
+            position: fixed;
+            z-index: 30;
+            bottom: -30px;
+            animation: heart 5s linear forwards
+        }
+
+        @keyframes heart {
+            to {
+                transform: translateY(-110vh) rotate(360deg);
+                opacity: 0
+            }
+        }
+
+        @keyframes bob {
+            50% {
+                transform: translateY(-10px)
+            }
+        }
+
+        @media(max-width:500px) {
+            .counter {
+                gap: 6px
+            }
+
+            .time {
+                width: 69px
+            }
+
+            .envelope {
+                width: 290px
+            }
+
+            .flap {
+                border-left-width: 145px;
+                border-right-width: 145px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="page active" id="p1">
+        <div class="bg"></div>
+        <div class="stars"></div>
+        <div class="content">
+            <div class="emoji">🎁</div>
+            <div class="tag">একটা ছোট্ট সারপ্রাইজ</div>
+            <h1>হেই</h1>
+            <p class="sub">তোমার জন্য একটা জিনিস বানিয়েছি।<br>কিন্তু সবকিছু একসাথে দেখাবো না… 😌</p>
+            <button class="btn" onclick="go(2);burst()">চলো দেখি! ✨</button>
+        </div>
+    </section>
+
+    <section class="page" id="p2">
+        <div class="bg"></div>
+        <div class="content">
+            <div class="emoji">🤫</div>
+            <div class="tag">তোমার জন্য</div>
+            <h1>একটা প্রশ্ন আছে…</h1>
+            <p class="sub">তুমি কি আজকে একটু স্পেশাল কিছু পাওয়ার জন্য প্রস্তুত?</p>
+            <div class="choice">
+                <div class="card" onclick="go(3);burst()">
+                    <div>🥰</div>
+                    <p>হ্যাঁ! আমি প্রস্তুত 💗</p>
+                </div>
+                <div class="card" onclick="tease()">
+                    <div>🙈</div>
+                    <p>না 😐</p>
+                </div>
+            </div>
+            <p class="tap" id="teaseText"></p>
+        </div>
+    </section>
+
+    <section class="page" id="p3">
+        <div class="bg"></div>
+        <div class="content">
+            <div class="tag">২২ সেপ্টেম্বর</div>
+            <h1>তোমার জন্মদিন! 🎂</h1>
+            <p class="sub">তাই একটা চিঠি লিখলাম তোমার জন্য</p>
+            <!-- <div class="counter">
+                <div class="time"><b id="d">00</b><span>দিন</span></div>
+                <div class="time"><b id="h">00</b><span>ঘণ্টা</span></div>
+                <div class="time"><b id="m">00</b><span>মিনিট</span></div>
+                <div class="time"><b id="s">00</b><span>সেকেন্ড</span></div>
+            </div> -->
+            <button class="btn" onclick="go(4);burst()">চিঠিটা খুলো 💌</button>
+        </div>
+    </section>
+
+    <section class="page" id="p4">
+        <div class="bg"></div>
+        <div class="content">
+            <div class="tag">তোমার জন্য একটা চিঠি</div>
+            <h1>এটা খুলবে?</h1>
+            <p class="sub">ভেতরে একটা ছোট্ট কথা লুকিয়ে আছে।</p>
+            <div class="envelope" id="env" onclick="openEnv()">
+                <div class="letter">
+                    <h3>Habiba,</h3>
+                    <p>তোমার জন্মদিনে শুধু একটা কথাই বলতে চাই—তুমি যেন সবসময় এমনই হাসিখুশি থাকো। 🌸<br>তোমার প্রতিটা
+                        স্বপ্ন পূরণ হোক এবং জীবন ভরে উঠুক সুন্দর মুহূর্তে। ❤️</p>
+                </div>
+                <div class="env"></div>
+                <div class="flap"></div>
+            </div>
+            <button class="btn" onclick="go(5);burst()">আরেকটা সারপ্রাইজ আছে… 👀</button>
+        </div>
+    </section>
+
+    <section class="page" id="p5">
+        <div class="bg"></div>
+        <div class="content">
+            <div class="tag">একটা একটা করে</div>
+            <div class="reason">💖</div>
+            <h1>তুমি কেন এত স্পেশাল?</h1>
+            <div class="reasonText" id="reasonText">এই বাটনে ক্লিক করো… ✨</div><button class="btn"
+                onclick="nextReason()">কারণটা বলো 💗</button>
+            <p class="tap">৩টা ছোট্ট কারণ আছে</p>
+        </div>
+    </section>
+
+    <section class="page" id="p6">
+        <div class="bg"></div>
+        <div class="content">
+            <div class="tag">এবার আসল সারপ্রাইজ</div>
+            <h1>শুভ জন্মদিন, Habiba! 🎂</h1>
+            <p class="sub">কিন্তু কেকের মোমবাতিগুলো এখনও জ্বলছে…</p>
+            <div class="cake">
+                <div class="candle c1" onclick="candle(this)">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle c2" onclick="candle(this)">
+                    <div class="flame"></div>
+                </div>
+                <div class="candle c3" onclick="candle(this)">
+                    <div class="flame"></div>
+                </div>
+                <div class="base"></div>
+                <div class="cream"></div>
+                <div class="plate"></div>
+            </div>
+            <p class="tap" id="cakeHint">তিনটা মোমবাতিতে ক্লিক করো ✨</p>
+        </div>
+    </section>
+
+    <section class="page" id="p7">
+        <div class="bg"></div>
+        <div class="stars"></div>
+        <div class="content">
+            <div class="emoji">🌟</div>
+            <div class="tag">শেষ সারপ্রাইজ</div>
+            <!-- <h1>একটা ইচ্ছা করো…</h1>
+            <p class="quote">চোখ বন্ধ করো।<br>মনে মনে একটা ইচ্ছা করো।<br>তারপর নিচের বাটনে ক্লিক করো। ✨</p> -->
+            <button class="btn" onclick="wish()">বাটনে ক্লিক করো 🌠</button>
+        </div>
+    </section>
+
+    <section class="page" id="p8">
+        <div class="bg"></div>
+        <div class="stars"></div>
+        <div class="content">
+            <div class="emoji">💗</div>
+            <div class="tag">তোমার জন্য</div>
+            <h1>শুভ জন্মদিন, Habiba! 🎉</h1>
+            <p class="quote">তোমার হাসি যেন সবসময় এমনই সুন্দর থাকে।<br>তোমার প্রতিটা স্বপ্ন পূরণ হোক।<br>সামনের প্রতিটা
+                দিন হোক আজকের থেকেও সুন্দর। 🌸</p>
+            <p class="sub">তুমি সত্যিই অনেক স্পেশাল।</p><button class="btn" onclick="go(1)">আবার শুরু করো ↻</button>
+        </div>
+    </section>
+
+    <script>
+        let reasonIndex = 0, candles = 0;
+        const reasons = ["কারণ জানি না। 😊", "কারণ জানি না 🌸", "কারণ জানি না"];
+        function go(n) {document.querySelectorAll(".page").forEach(x => x.classList.remove("active")); document.getElementById("p" + n).classList.add("active")}
+        function tease() {document.getElementById("teaseText").textContent = ["আচ্ছা… 😏", "এই বাটনটা আবার ক্লিক করলে কিন্তু সারপ্রাইজ আসবে! 🙈", "ঠিক আছে, এবার হ্যাঁ বলো! 😂"][Math.floor(Math.random() * 3)]}
+        function openEnv() {document.getElementById("env").classList.add("open"); burst()}
+        function nextReason() {if (reasonIndex < 3) {document.getElementById("reasonText").textContent = reasons[reasonIndex++]; burst()} else {go(6); burst()} }
+        function candle(el) {if (!el.querySelector(".flame")) return; el.querySelector(".flame").remove(); candles++; burst(); if (candles === 3) {document.getElementById("cakeHint").textContent = "সব মোমবাতি নিভে গেছে! 🎉"; setTimeout(() => go(7), 1000)} }
+        function wish() {burst(260); for (let i = 0; i < 20; i++)setTimeout(heart, i * 70); setTimeout(() => go(8), 1000)}
+        function heart() {let h = document.createElement("div"); h.className = "heart"; h.textContent = ["❤️", "💗", "💜", "✨", "💕"][Math.floor(Math.random() * 5)]; h.style.left = Math.random() * 100 + "vw"; h.style.fontSize = 15 + Math.random() * 22 + "px"; document.body.appendChild(h); setTimeout(() => h.remove(), 7000)}
+        function burst(n = 110) {for (let i = 0; i < n; i++) {let e = document.createElement("div"); e.className = "spark"; e.style.left = "50vw"; e.style.top = "50vh"; e.style.setProperty("--x", (Math.random() * 2 - 1) * innerWidth + "px"); e.style.setProperty("--y", (Math.random() * 2 - 1) * innerHeight + "px"); document.body.appendChild(e); setTimeout(() => e.remove(), 1000)} for (let i = 0; i < 7; i++)setTimeout(heart, i * 100)}
+        function update() {let now = new Date(), target = new Date(now.getFullYear(), 8, 22); if (now > target) target.setFullYear(now.getFullYear() + 1); let x = target - now; document.getElementById("d").textContent = String(Math.floor(x / 86400000)).padStart(2, "0"); document.getElementById("h").textContent = String(Math.floor(x % 86400000 / 3600000)).padStart(2, "0"); document.getElementById("m").textContent = String(Math.floor(x % 3600000 / 60000)).padStart(2, "0"); document.getElementById("s").textContent = String(Math.floor(x % 60000 / 1000)).padStart(2, "0")} update(); setInterval(update, 1000);
+    </script>
+</body>
+
+</html>
